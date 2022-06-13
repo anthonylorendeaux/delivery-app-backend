@@ -17,7 +17,7 @@ services:
     depends_on: 
       - db
     environment:
-      - MONGO_DB_URI=mongodb://db/microservices
+      - MONGO_DB_URI=mongodb://db/cesi-eat-db
   db:
     image: mongo
     ports:
