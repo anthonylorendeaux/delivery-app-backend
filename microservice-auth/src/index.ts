@@ -2,11 +2,11 @@ import express, { Application, Request, Response, NextFunction } from "express"
 import bodyParser from "body-parser"
 import "dotenv/config"
 import routes from "./Routes"
-import connect from "./utils/connect"
 import Logger from "./utils/logger"
 import swaggerDocs from "./utils/swagger"
 import cors from 'cors';
 import morganMiddleware from "./utils/morgan"
+import router from "./Routes/index"
 
 const app = express()
 
@@ -20,14 +20,12 @@ app.use(cors(options));
 app.use(morganMiddleware);
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Microservice is running !")
+  res.send("Authentification service is running !")
 })
 
 const PORT = process.env.PORT
-const db = "mongodb://mongo/microservices"
 
-connect(db)
-routes(app)
+app.use('/', router);
 
 app.listen(PORT, () => {
   Logger.info(`App is running on port ! ${PORT}`) 
