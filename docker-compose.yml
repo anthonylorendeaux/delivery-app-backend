@@ -1,6 +1,7 @@
 version: '3'
 
 services:
+  # Microservices
   microservice:
     build:
       context: './microservice-template'
@@ -15,13 +16,42 @@ services:
       - "3001:3000"
     command: npm run dev
     depends_on: 
-      - db
+      - mongo
     environment:
-      - MONGO_DB_URI=mongodb://db/cesi-eat-db
-  db:
+      - MONGO_DB_URI=mongodb://mongo/cesi-eat-db
+  microservice-auth:
+    build:
+      context: './microservice-auth'
+      dockerfile: Dockerfile
+      target: base
+    volumes:
+      - ./microservice-auth/src:/home/node/app/src
+      - ./microservice-auth/nodemon.json:/home/node/app/nodemon.json
+    expose:
+      - '3000'
+    ports:
+      - "3002:3000"
+    command: npm run dev
+    depends_on: 
+      - mysql
+    environment:
+      - MONGO_DB_URI=mongodb://mongo/cesi-eat-db
+  # Databases
+  mongo:
     image: mongo
     ports:
       - "27017:27017"
+    volumes:
+      - ~/apps/mongo:/data/db
+  mysql:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test_db
+    ports:
+      - "3307:3306"
+    volumes:
+      - ~/apps/mysql:/var/lib/mysql
 
   nginx:
     image: nginx:latest
