@@ -4,22 +4,34 @@ import {Request} from "express"
  * @openapi
  * components:
  *   schema:
- *     Product:
+ *     User:
  *       type: object
  *       required:
- *        - title
- *        - description
- *        - price
- *        - image
+ *        - name
+ *        - email
+ *        - profilePicture
+ *        - phone
+ *        - password
+ *        - surname
+ *        - isSuspended
+ *        - categoryId
  *       properties:
- *         title:
+ *         name:
  *           type: string
- *         description:
+ *         email:
  *           type: string
- *         price:
- *           type: number
- *         image:
+ *         profilePicture:
  *           type: string
+ *         phone:
+ *           type: string
+ *         password:
+ *           type: string
+ *         surname:  
+ *           type: string
+ *         isSuspended:
+ *           type: boolean
+ *         categoryId:
+ *           type: number  
  */
 
 export interface IUser {

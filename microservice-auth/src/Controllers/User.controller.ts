@@ -26,6 +26,12 @@ export async function getUserHandler(
 
   const user = await findUser(id);
 
+  if(!user) {
+    return res.status(404).send({
+      message: `User with id ${id} does not exist`
+    });
+  }
+
   return res.send(user);
 }
 
@@ -47,6 +53,12 @@ export async function updateUserHandler(
 
   const user = await updateUser(id,body);
 
+  if(!user) {
+    return res.status(404).send({
+      message: `User with id ${id} does not exist`
+    });
+  }
+  
   return res.send(user);
 }
 
@@ -57,6 +69,12 @@ export async function deleteUserHandler(
   const id = req.params.id;
 
   const user = await deleteUser(id);
+
+  if(!user) {
+    return res.status(404).send({
+      message: `User with id ${id} does not exist`
+    });
+  }
 
   return res.send(user);
 }
