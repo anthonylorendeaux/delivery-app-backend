@@ -1,0 +1,62 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Restaurant{
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  name  String
+  description String
+  category  restaurantCategory?  @relation(fields: [categoryId], references: [id])
+  categoryId  String? @db.ObjectId 
+  picture String
+  rating  Int 
+  workDays  String[]
+  workHours String[]
+  articles Article[]
+  menuIDs String[]  @db.ObjectId
+  menus Menu[] 
+  articleIDs  String[]  @db.ObjectId
+}
+
+model restaurantCategory{
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  name  String
+  restaurants  Restaurant[]
+}
+
+model articleCategory{
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  name  String
+  articles  Article[]
+}
+
+model Article{
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  restaurant  Restaurant  @relation(fields: [restaurantId], references: [id])
+  restaurantId  String @db.ObjectId 
+  category  articleCategory  @relation(fields: [categoryId], references: [id])
+  categoryId  String @db.ObjectId
+  name  String
+  price String
+  picture String
+  menuIDs String[]  @db.ObjectId
+  menus Menu[]  @relation(fields: [menuIDs],references: [id])
+  description String
+}
+
+model Menu{
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  articleIDs  String[]  @db.ObjectId
+  articles  Article[] @relation(fields: [articleIDs],references: [id])
+  restaurant  Restaurant  @relation(fields: [restaurantId], references: [id])
+  restaurantId  String @db.ObjectId 
+  total String
+}
