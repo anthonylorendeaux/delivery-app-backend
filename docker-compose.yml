@@ -18,7 +18,8 @@ services:
     depends_on: 
       - mysql
     environment:
-      - MONGO_DB_URI=mongodb://mongo/cesi-eat-db
+      - DATABASE_URL=mysql://root:root@mysql/cesi-eat
+      - PORT=3000
   microservice-cdn:
     build:
       context: './microservice-cdn'
@@ -32,6 +33,8 @@ services:
     ports:  
       - "3003:3000"
     command: npm run dev
+    environment:
+      - PORT=3000
   microservice-restaurants:
     build:
       context: './microservice-restaurants'
@@ -48,7 +51,8 @@ services:
     depends_on: 
       - mongo
     environment:
-      - MONGO_DB_URI=mongodb://mongo/cesi-eat-db
+      - DATABASE_URL=mongodb://mongo/cesi-eat-db
+      - PORT=3000
   # Databases
   mongo:
     image: mongo

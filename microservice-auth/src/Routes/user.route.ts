@@ -6,7 +6,7 @@ const router = Router();
 
 /**
  * @openapi
- * /api/v1/user/healthcheck:
+ * '/api/v1/user/healthcheck':
  *  get:
  *     tags:
  *     - Healthcheck
@@ -21,7 +21,7 @@ return res.sendStatus(200)
 
 /**
  * @openapi
- * '/api/v1/users':
+ * '/api/v1/user/all':
  *  get:
  *     tags: [User]
  *     summary: Get all users
@@ -33,7 +33,7 @@ return res.sendStatus(200)
  *           schema: 
  *              $ref: '#/components/schema/User'
 */
-router.get("/users", getAllUsersHandler);
+router.get("/all", getAllUsersHandler);
 
 /**
  * @openapi
@@ -58,7 +58,7 @@ router.get("/users", getAllUsersHandler);
  *       404:
  *          description: User not found
 */
-router.get("/user/:id", getUserHandler);
+router.get("/:id", getUserHandler);
 
 /**
  * @openapi
@@ -84,11 +84,11 @@ router.get("/user/:id", getUserHandler);
  *       400:
  *         description: Bad request
  * */
-router.post("/user",createUserHandler);
+router.post("/",createUserHandler);
 
 /**
  * @openapi
- *  /user/{id}:
+ *  '/api/v1/user/{id}':
  *    delete:
  *      summary: Delete a user by id
  *      tags: [User]
@@ -105,11 +105,11 @@ router.post("/user",createUserHandler);
  *        404:
  *          description: The user was not found
  */
-router.delete("/user/:id", deleteUserHandler);
+router.delete("/:id", deleteUserHandler);
 
 /**
  * @openapi
- * /user/{id}:
+ * '/api/v1/user/{id}':
  *   put:
  *     summary: update a user by id
  *     tags: [User]
@@ -139,7 +139,7 @@ router.delete("/user/:id", deleteUserHandler);
  *         description: Some errors happend.
  *
  */
-router.put("/user/:id", updateUserHandler);
+router.put("/:id", updateUserHandler);
 
 
 export default router;

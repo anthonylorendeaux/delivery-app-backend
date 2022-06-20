@@ -22,7 +22,7 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Microservice is running !")
 })
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 3000
 
 routes(app)
 

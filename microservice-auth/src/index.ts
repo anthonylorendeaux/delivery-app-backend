@@ -23,7 +23,7 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Authentification service is running !")
 })
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 3000
 
 app.use('/', router);
 
