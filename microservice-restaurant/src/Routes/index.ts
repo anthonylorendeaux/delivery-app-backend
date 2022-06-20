@@ -78,64 +78,64 @@ function routes(app: Express) {
    *         description: Bad request
    */
 
-  app.get("/api/v1/microservice/restaurants",getAllRestaurantHandler);
+  app.get("/api/v1/restaurants",getAllRestaurantHandler);
 
-  app.post("/api/v1/microservice/restaurants",createRestaurantHandler);
+  app.post("/api/v1/restaurants",createRestaurantHandler);
 
-  app.get("/api/v1/microservice/restaurants/:id", getRestaurantHandler);
+  app.get("/api/v1/restaurants/:id", getRestaurantHandler);
 
-  app.delete("/api/v1/microservice/restaurants/:id", deleteRestaurantHandler);
+  app.delete("/api/v1/restaurants/:id", deleteRestaurantHandler);
 
-  app.put("/api/v1/microservice/restaurants/:id", updateRestaurantHandler);
+  app.put("/api/v1/restaurants/:id", updateRestaurantHandler);
 
 /** ---------------------------------- Article Routes ------------------------------------------- */
 
 
-  app.get("/api/v1/microservice/articles",getAllArticleHandler);
+  app.get("/api/v1/articles",getAllArticleHandler);
 
-  app.post("/api/v1/microservice/articles",createArticleHandler);
+  app.post("/api/v1/articles",createArticleHandler);
 
-  app.get("/api/v1/microservice/articles/:id", getArticleHandler);
+  app.get("/api/v1/articles/:id", getArticleHandler);
 
-  app.delete("/api/v1/microservice/articles/:id", deleteArticleHandler);
+  app.delete("/api/v1/articles/:id", deleteArticleHandler);
 
-  app.put("/api/v1/microservice/articles/:id", updateArticleHandler);
+  app.put("/api/v1/articles/:id", updateArticleHandler);
 
 /** ---------------------------------- Menu Routes ------------------------------------------- */
 
-  app.get("/api/v1/microservice/menus",getAllMenuHandler);
+  app.get("/api/v1/menus",getAllMenuHandler);
 
-  app.post("/api/v1/microservice/menus",createMenuHandler);
+  app.post("/api/v1/menus",createMenuHandler);
 
-  app.get("/api/v1/microservice/menus/:id", getMenuHandler);
+  app.get("/api/v1/menus/:id", getMenuHandler);
 
-  app.delete("/api/v1/microservice/menus/:id", deleteMenuHandler);
+  app.delete("/api/v1/menus/:id", deleteMenuHandler);
 
-  app.put("/api/v1/microservice/menus/:id", updateMenuHandler);
+  app.put("/api/v1/menus/:id", updateMenuHandler);
 
   /** ---------------------------------- Article Category Routes ------------------------------------------- */
 
-  app.get("/api/v1/microservice/articleCategories",getAllArticleCategoryHandler);
+  app.get("/api/v1/articleCategories",getAllArticleCategoryHandler);
 
-  app.post("/api/v1/microservice/articleCategories",createArticleCategoryHandler);
+  app.post("/api/v1/articleCategories",createArticleCategoryHandler);
 
-  app.get("/api/v1/microservice/articleCategories/:id", getArticleCategoryHandler);
+  app.get("/api/v1/articleCategories/:id", getArticleCategoryHandler);
 
-  app.delete("/api/v1/microservice/articleCategories/:id", deleteArticleCategoryHandler);
+  app.delete("/api/v1/articleCategories/:id", deleteArticleCategoryHandler);
 
-  app.put("/api/v1/microservice/articleCategories/:id", updateArticleCategoryHandler);
+  app.put("/api/v1/articleCategories/:id", updateArticleCategoryHandler);
 
   /** ---------------------------------- Restaurant Category Routes ------------------------------------------- */
 
-  app.get("/api/v1/microservice/restaurantCategories",getAllRestaurantCategoryHandler);
+  app.get("/api/v1/restaurantCategories",getAllRestaurantCategoryHandler);
 
-  app.post("/api/v1/microservice/restaurantCategories",createRestaurantCategoryHandler);
+  app.post("/api/v1/restaurantCategories",createRestaurantCategoryHandler);
 
-  app.get("/api/v1/microservice/restaurantCategories/:id", getRestaurantCategoryHandler);
+  app.get("/api/v1/restaurantCategories/:id", getRestaurantCategoryHandler);
 
-  app.delete("/api/v1/microservice/restaurantCategories/:id", deleteArticleCategoryHandler);
+  app.delete("/api/v1/restaurantCategories/:id", deleteArticleCategoryHandler);
 
-  app.put("/api/v1/microservice/restaurantCategories/:id", updateRestaurantCategoryHandler);
+  app.put("/api/v1/restaurantCategories/:id", updateRestaurantCategoryHandler);
 
 
 

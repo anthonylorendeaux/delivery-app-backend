@@ -32,7 +32,6 @@ const ArticleSchema: Schema = new Schema({
   },
   picture: {
     type: String,
-    required: true,
   },
   price: {
     type: String,
