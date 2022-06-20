@@ -36,6 +36,19 @@ services:
       - mysql
     environment:
       - MONGO_DB_URI=mongodb://mongo/cesi-eat-db
+  microservice-cdn:
+    build:
+      context: './microservice-cdn'
+      dockerfile: Dockerfile
+      target: base
+    volumes:
+      - ./microservice-cdn/src:/home/node/app/src
+      - ./microservice-cdn/nodemon.json:/home/node/app/nodemon.json
+    expose:
+      - '3000'
+    ports:  
+      - "3003:3000"
+    command: npm run dev
   # Databases
   mongo:
     image: mongo

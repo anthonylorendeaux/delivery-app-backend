@@ -24,7 +24,6 @@ app.get("/", (req: Request, res: Response) => {
 
 const PORT = process.env.PORT
 
-//connect(db)
 routes(app)
 
 app.listen(PORT, () => {
