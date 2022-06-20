@@ -2,23 +2,6 @@ version: '3'
 
 services:
   # Microservices
-  microservice:
-    build:
-      context: './microservice-template'
-      dockerfile: Dockerfile
-      target: base
-    volumes:
-      - ./microservice-template/src:/home/node/app/src
-      - ./microservice-template/nodemon.json:/home/node/app/nodemon.json
-    expose:
-      - '3000'
-    ports:
-      - "3001:3000"
-    command: npm run dev
-    depends_on: 
-      - mongo
-    environment:
-      - MONGO_DB_URI=mongodb://mongo/cesi-eat-db
   microservice-auth:
     build:
       context: './microservice-auth'
