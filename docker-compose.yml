@@ -49,6 +49,23 @@ services:
     ports:  
       - "3003:3000"
     command: npm run dev
+  microservice-restaurants:
+    build:
+      context: './microservice-restaurants'
+      dockerfile: Dockerfile
+      target: base
+    volumes:
+      - ./microservice-restaurants/src:/home/node/app/src
+      - ./microservice-restaurants/nodemon.json:/home/node/app/nodemon.json
+    expose:
+      - '3000'
+    ports:
+      - "3004:3000"
+    command: npm run dev
+    depends_on: 
+      - mongo
+    environment:
+      - MONGO_DB_URI=mongodb://mongo/cesi-eat-db
   # Databases
   mongo:
     image: mongo
