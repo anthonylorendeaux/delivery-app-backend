@@ -34,8 +34,10 @@ const RestaurantSchema: Schema = new Schema({
     type: String,
   },
   rating: {
-    type: Number,
-    default: 0,
+    type: String,
+  },
+  offer: {
+    type: Boolean,
   },
   workDays: {
     type: [String],
@@ -53,6 +55,13 @@ const RestaurantSchema: Schema = new Schema({
   articleIds: {
     type: [{type: mongoose.Schema.Types.ObjectId, ref: 'article'}],
   },
+  deliveryTime: {
+    type: Number,
+  },
+  userId: {
+    type: Number,
+    required: true,
+  }
 },
 {
   timestamps: true,

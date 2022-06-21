@@ -23,8 +23,8 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Microservice is running !")
 })
 
-const PORT = process.env.PORT
-const db = "mongodb://mongo/db"
+const PORT = process.env.PORT || 3000
+const db = process.env.DATABASE_URL || "mongodb://localhost:27017/restaurants"
 
 connect(db)
 
