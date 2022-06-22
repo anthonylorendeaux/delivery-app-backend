@@ -7,6 +7,7 @@ import {generateAuthToken, generateRefreshToken, verifyToken} from '../utils/jwt
 import jwt from 'jsonwebtoken';
 
 export async function registerHandler(req: Request, res: Response) {
+  Logger.info(req)
   let {email, password} = req.body;
 
   const userExists = await findUser(10);

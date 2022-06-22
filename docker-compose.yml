@@ -1,15 +1,15 @@
 version: '3'
 
 services:
-  # Microservices
-  microservice-auth:
+  # backs
+  back-auth:
     build:
-      context: './microservice-auth'
+      context: './back-auth'
       dockerfile: Dockerfile
       target: base
     volumes:
-      - ./microservice-auth/src:/home/node/app/src
-      - ./microservice-auth/nodemon.json:/home/node/app/nodemon.json
+      - ./back-auth/src:/home/node/app/src
+      - ./back-auth/nodemon.json:/home/node/app/nodemon.json
     expose:
       - '3000'
     ports:
@@ -20,14 +20,14 @@ services:
     environment:
       - DATABASE_URL=mysql://root:root@mysql/cesi-eat
       - PORT=3000
-  microservice-cdn:
+  back-cdn:
     build:
-      context: './microservice-cdn'
+      context: './back-cdn'
       dockerfile: Dockerfile
       target: base
     volumes:
-      - ./microservice-cdn/src:/home/node/app/src
-      - ./microservice-cdn/nodemon.json:/home/node/app/nodemon.json
+      - ./back-cdn/src:/home/node/app/src
+      - ./back-cdn/nodemon.json:/home/node/app/nodemon.json
     expose:
       - '3000'
     ports:  
@@ -35,18 +35,54 @@ services:
     command: npm run dev
     environment:
       - PORT=3000
-  microservice-restaurants:
+  back-restaurants:
     build:
-      context: './microservice-restaurants'
+      context: './back-restaurants'
       dockerfile: Dockerfile
       target: base
     volumes:
-      - ./microservice-restaurants/src:/home/node/app/src
-      - ./microservice-restaurants/nodemon.json:/home/node/app/nodemon.json
+      - ./back-restaurants/src:/home/node/app/src
+      - ./back-restaurants/nodemon.json:/home/node/app/nodemon.json
     expose:
       - '3000'
     ports:
       - "3004:3000"
+    command: npm run dev
+    depends_on: 
+      - mongo
+    environment:
+      - DATABASE_URL=mongodb://mongo/cesi-eat-db
+      - PORT=3000
+  back-delivery:
+    build:
+      context: './back-delivery'
+      dockerfile: Dockerfile
+      target: base
+    volumes:
+      - ./back-delivery/src:/home/node/app/src
+      - ./back-delivery/nodemon.json:/home/node/app/nodemon.json
+    expose:
+      - '3000'
+    ports:
+      - "3005:3000"
+    command: npm run dev
+    depends_on: 
+      - mongo
+    environment:
+      - DATABASE_URL=mongodb://mongo/cesi-eat-db
+      - PORT=3000
+  back-location:
+    build:
+      context: './back-location'
+      dockerfile: Dockerfile
+      target: base
+    volumes:
+      - ./back-location/src:/home/node/app/src
+      - ./back-location/nodemon.json:/home/node/app/nodemon.json
+    expose:
+      - '3000'
+    ports:
+      - "3006:3000"
     command: npm run dev
     depends_on: 
       - mongo
@@ -77,6 +113,6 @@ services:
     volumes:
       - ./default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
-      - microservice-auth
-      - microservice-cdn
-      - microservice-restaurants
+      - back-auth
+      - back-cdn
+      - back-restaurants

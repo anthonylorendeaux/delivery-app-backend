@@ -1,11 +1,12 @@
 import express, { Application, Request, Response, NextFunction } from "express"
 import bodyParser from "body-parser"
 import "dotenv/config"
-import routes from "./Routes"
+import router from "./Routes/index"
 import connect from "./utils/connect"
 import Logger from "./utils/logger"
 import swaggerDocs from "./utils/swagger"
 import cors from 'cors';
+import morganMiddleware from "./utils/morgan"
 
 const app = express()
 
@@ -16,16 +17,18 @@ const options: cors.CorsOptions = {
 };
 
 app.use(cors(options));
+app.use(morganMiddleware);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Microservice is running !")
 })
 
-const PORT = process.env.PORT
-const db = "mongodb://localhost:27017/microservices"
+const PORT = process.env.PORT || 3000
+const db = process.env.DATABASE_URL || "mongodb://localhost:27017/restaurants"
 
 connect(db)
-routes(app)
+
+app.use('/', router);
 
 app.listen(PORT, () => {
   Logger.info(`App is running on port ! ${PORT}`) 
