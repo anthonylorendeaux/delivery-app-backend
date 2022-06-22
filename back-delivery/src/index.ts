@@ -22,7 +22,7 @@ app.get("/", (req: Request, res: Response) => {
 })
 
 const PORT = process.env.PORT
-const db = "mongodb://localhost:27017/microservices"
+const db = "mongodb://localhost:27017/db"
 
 connect(db)
 routes(app)

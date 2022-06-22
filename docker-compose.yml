@@ -53,6 +53,42 @@ services:
     environment:
       - DATABASE_URL=mongodb://mongo/cesi-eat-db
       - PORT=3000
+  back-delivery:
+    build:
+      context: './back-delivery'
+      dockerfile: Dockerfile
+      target: base
+    volumes:
+      - ./back-delivery/src:/home/node/app/src
+      - ./back-delivery/nodemon.json:/home/node/app/nodemon.json
+    expose:
+      - '3000'
+    ports:
+      - "3005:3000"
+    command: npm run dev
+    depends_on: 
+      - mongo
+    environment:
+      - DATABASE_URL=mongodb://mongo/cesi-eat-db
+      - PORT=3000
+  back-location:
+    build:
+      context: './back-location'
+      dockerfile: Dockerfile
+      target: base
+    volumes:
+      - ./back-location/src:/home/node/app/src
+      - ./back-location/nodemon.json:/home/node/app/nodemon.json
+    expose:
+      - '3000'
+    ports:
+      - "3006:3000"
+    command: npm run dev
+    depends_on: 
+      - mongo
+    environment:
+      - DATABASE_URL=mongodb://mongo/cesi-eat-db
+      - PORT=3000
   # Databases
   mongo:
     image: mongo
