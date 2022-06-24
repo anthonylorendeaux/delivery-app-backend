@@ -15,7 +15,7 @@ export async function createUser(input: IUser) {
                 password,
                 surname,
                 isSuspended,
-                categoryId
+                categoryId,
             }
         })
         return user;
@@ -52,7 +52,10 @@ export async function findAllUsers() {
 
 export async function updateUser(id: IUser['id'], input: IUser) {
     try {
-        const {name, email, profilePicture, phone, password, surname, isSuspended, createdAt, updatedAt, categoryId} = input;
+        const {name, email, profilePicture, phone, password, surname, isSuspended, createdAt, updatedAt, categoryId, location} = input;
+        
+        let address = location[0].address 
+
         const user = await prisma.user.update({
             where: {
                 id: Number(id),
@@ -65,10 +68,33 @@ export async function updateUser(id: IUser['id'], input: IUser) {
                 password,
                 surname,
                 isSuspended,
-                categoryId
+                categoryId,
+                location: {
+                    create: {  
+                        address: location[0].address,
+                        primary: location[0].primary
+                    },
+                }
+            },
+            include: {
+                location: true
             }
         })
         return user;
+    } catch(e) {
+        throw e;
+    }
+}
+
+export async function deleteAddress(address: string, userId: string) {
+    try {
+        const location = await prisma.location.deleteMany({
+            where: {
+                address: address,
+                userId: Number(userId),
+            }
+        })
+        return location;
     } catch(e) {
         throw e;
     }
