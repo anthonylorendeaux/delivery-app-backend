@@ -102,10 +102,11 @@ router.post("/login", loginHandler);
  *    scheme: bearer
 */
 router.get("/token", authMiddleware, (req: Request, res: Response, next: NextFunction) => {
-        const tokenData = req.body.tokenData;
-        Logger.debug(tokenData);
-        res.sendStatus(200);
-    });
+    Logger.info("Token request")
+    const tokenData = req.body.tokenData;
+    Logger.debug(tokenData);
+    res.sendStatus(200);
+});
 
 /**
  * @openapi

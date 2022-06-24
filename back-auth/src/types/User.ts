@@ -46,6 +46,12 @@ export interface IUser {
   createdAt: Date,
   updatedAt: Date,
   categoryId: number,
+  location: Array<ILocation>
+}
+
+export interface ILocation {
+  address: string,
+  primary: boolean
 }
 
 export interface IGetUserReq extends Request<{ id: IUser['id']}> {}
