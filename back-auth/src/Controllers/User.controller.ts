@@ -41,6 +41,7 @@ export async function getAllUsersHandler(
 ){
   const users = await findAllUsers();
 
+  Logger.info(users);
   return res.send(users);
 }
 
