@@ -59,6 +59,4 @@ model Session {
   isAuth    Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  
-  @@unique([userId, isAuth])
 }

@@ -94,7 +94,7 @@ export async function refreshTokenHandler(req: Request, res: Response) {
   }
 }
 
-export async function disconnectUser(req: Request, res: Response) {
+export async function disconnectUserHandler(req: Request, res: Response) {
   const auth = req.headers.authorization;
   if (auth && auth.startsWith('Bearer')) {
     const token = auth.slice(7);
@@ -117,5 +117,6 @@ export async function disconnectUser(req: Request, res: Response) {
     throw new Error('Authentication error');
   }
 }
+
 
 
