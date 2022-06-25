@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response, Router } from "express";
-import { loginHandler, refreshTokenHandler, registerHandler} from "../Controllers/Auth.controller"
+import { disconnectUserHandler, loginHandler, refreshTokenHandler, registerHandler} from "../Controllers/Auth.controller"
 import Logger from "../utils/logger"
 import { authMiddleware } from "../middleware/authMiddleware";
 
@@ -129,5 +129,7 @@ router.get("/token", authMiddleware, (req: Request, res: Response, next: NextFun
  *    scheme: bearer
 */
 router.get("/refresh", refreshTokenHandler)
+
+router.get("/disconnect", disconnectUserHandler)
 
 export default router;

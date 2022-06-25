@@ -7,7 +7,7 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
     const token = auth.slice(7);
 
     try {
-      const tokenData = verifyToken(token, "anthony");
+      const tokenData = verifyToken(token, "token");
       req.body.tokenData = tokenData;
       next();
     } catch (error) {

@@ -9,6 +9,15 @@ const categories = [
     }, 
     {
         name: "Client"
+    }, 
+    {
+        name: "Restaurant"
+    },
+    {
+        name: "Delivery"
+    },
+    {
+        name: "Technical"
     }
 ]
 // seed database

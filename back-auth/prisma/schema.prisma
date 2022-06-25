@@ -13,7 +13,7 @@ datasource db {
 model User {
   id             Int        @id @default(autoincrement())
   name           String     @db.VarChar(255)
-  email          String     @db.VarChar(255)
+  email          String     @unique @db.VarChar(255)
   profilePicture String     @db.VarChar(255)
   phone          String     @db.VarChar(255)
   password       String     @db.VarChar(255)
@@ -21,11 +21,13 @@ model User {
   isSuspended    Boolean    @default(false)
   createdAt      DateTime   @default(now())
   updatedAt      DateTime   @updatedAt
-  Category       Category?  @relation(fields: [categoryId], references: [id])
-  categoryId     Int?
+  Category       Category  @relation(fields: [categoryId], references: [id])
+  categoryId     Int
   location       Location[]
-  referer        Referer[] @relation("user")
-  refered        Referer[] @relation("refered")
+  session        Session[]
+  referer        Referer[]  @relation("user")
+  refered        Referer[]  @relation("refered")
+  isDeleted      Boolean    @default(false)
 }
 
 model Category {
@@ -35,17 +37,26 @@ model Category {
 }
 
 model Referer {
-  id         Int  @id @default(autoincrement())
-  user   User? @relation("user", fields: [userId], references: [id])
-  userId     Int?
-  refered    User? @relation("refered", fields: [referedId], references: [id]) 
-  referedId Int? @unique
+  id        Int   @id @default(autoincrement())
+  user      User? @relation("user", fields: [userId], references: [id])
+  userId    Int?
+  refered   User? @relation("refered", fields: [referedId], references: [id])
+  referedId Int?  @unique
 }
 
 model Location {
-  id Int @id @default(autoincrement())
-  address String @db.VarChar(255)
+  id      Int     @id @default(autoincrement())
+  address String  @db.VarChar(255)
   primary Boolean @default(false)
-  User       User? @relation(fields: [userId], references: [id])
-  userId     Int?
+  User    User?   @relation(fields: [userId], references: [id])
+  userId  Int?
+}
+
+model Session {
+  id        Int      @id @default(autoincrement())
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    Int?
+  isAuth    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
