@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import {restaurantPermissionHandler} from "../Controllers/Permission.controller";
+import {adminPermissionHandler, cdnPermissionHandler, clientPermissionHandler, orderPermissionHandler, restaurantsUpdatePermissionHandler} from "../Controllers/Permission.controller";
 
 const router = Router();
 
@@ -18,8 +18,14 @@ router.get("/healthcheck", async (req: Request, res: Response) => {
     return res.sendStatus(200)
 })
 
-router.get("/restaurant", restaurantPermissionHandler)
+router.get("/restaurants:update", restaurantsUpdatePermissionHandler)
 
+router.get("/cdn", cdnPermissionHandler)
 
+router.get("/order", orderPermissionHandler)
+
+router.get("/admin", adminPermissionHandler)
+
+router.get("/client", clientPermissionHandler)
 
 export default router;

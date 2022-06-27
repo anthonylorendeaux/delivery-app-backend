@@ -5,13 +5,13 @@ const router = Router();
 
 router.get("/",getAllRestaurantCategoryHandler);
 
-router.post("/",createRestaurantCategoryHandler);
+router.post("/update",createRestaurantCategoryHandler);
 
 router.get("/:id", getRestaurantCategoryHandler);
 
-router.delete("/:id", deleteRestaurantCategoryHandler);
+router.delete("/update/:id", deleteRestaurantCategoryHandler);
 
-router.put("/:id", updateRestaurantCategoryHandler);
+router.put("/update/:id", updateRestaurantCategoryHandler);
 
 
 

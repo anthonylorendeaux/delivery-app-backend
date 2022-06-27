@@ -24,12 +24,15 @@ import { Document } from "mongoose"
  *           type: string
  */
 
-export interface ILocation extends Document {
-  id: ObjectId;
-  location: String;
+export interface IOrder extends Document {
+  articles: Array<string>;
+  menus: Array<string>;
+  status: Array<string>;
+  discount: Boolean;
+  customerId: Number;
 }
 
-export interface IGetLocationReq extends Request<{ id: ILocation['id']}> {}
-export interface ICreateLocationReq extends Request<any, any,ILocation> {}
-export interface IUpdateLocationReq extends Request <{id: ILocation['id']}, any, ILocation> {}
-export interface IDeleteLocationReq extends Request <{ id: ILocation['id']}>{} 
+export interface IGetOrderReq extends Request<{ id: IOrder['id']}> {}
+export interface ICreateOrderReq extends Request<any, any,IOrder> {}
+export interface IUpdateOrderReq extends Request <{id: IOrder['id']}, any, IOrder> {}
+export interface IDeleteOrderReq extends Request <{ id: IOrder['id']}>{} 

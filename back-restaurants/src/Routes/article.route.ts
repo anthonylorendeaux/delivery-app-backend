@@ -5,12 +5,12 @@ const router = Router();
 
 router.get("/",getAllArticleHandler);
 
-router.post("/",createArticleHandler);
+router.post("/update",createArticleHandler);
 
 router.get("/:id", getArticleHandler);
 
-router.delete("/:id", deleteArticleHandler);
+router.delete("/update/:id", deleteArticleHandler);
 
-router.put("/:id", updateArticleHandler);
+router.put("/update/:id", updateArticleHandler);
 
 export default router;

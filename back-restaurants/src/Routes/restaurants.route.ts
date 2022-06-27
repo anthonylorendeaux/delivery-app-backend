@@ -31,12 +31,12 @@ const router = Router();
 
   router.get("/",getAllRestaurantHandler);
 
-  router.post("/",createRestaurantHandler);
+  router.post("/update",createRestaurantHandler);
 
   router.get("/:id", getRestaurantHandler);
 
-  router.delete("/:id", deleteRestaurantHandler);
+  router.delete("/update/:id", deleteRestaurantHandler);
 
-  router.put("/:id", updateRestaurantHandler);
+  router.put("/update/:id", updateRestaurantHandler);
 
 export default router;

@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 import Logger from '../utils/logger';
-import { createRestaurant, deleteRestaurant, findAndUpdateRestaurant, findRestaurant } from "../service/restaurant.service";
+import { createRestaurant, deleteRestaurant, findAllRestaurants, findAndUpdateRestaurant, findRestaurant } from "../service/restaurant.service";
 import { IDeleteRestaurantReq, IGetRestaurantReq, IUpdateRestaurantReq } from "../types/restaurant";
 import RestaurantModel from "../Models/Restaurant.model";
+import ArticleModel from "../Models/Article.model";
 
   export async function createRestaurantHandler(
     req: Request,
@@ -45,6 +46,8 @@ export async function getRestaurantHandler(
     return res.sendStatus(404);
   }
 
+  
+
   return res.send(restaurant);
 }
 
@@ -67,7 +70,7 @@ export async function getAllRestaurantHandler(
   req: Request,
   res: Response
 ) {
-  const restaurants = await RestaurantModel.find({});
+  const restaurants = await findAllRestaurants();
   return res.send(restaurants);
 }
 
