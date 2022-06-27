@@ -6,14 +6,39 @@ import bcrypt from 'bcrypt';
 import {generateAuthToken, generateRefreshToken, verifyToken} from '../utils/jwt';
 import jwt from 'jsonwebtoken';
 
-export async function restaurantPermissionHandler(req: Request, res: Response) {
-    checkPermissions(req, res, 'restaurants');
+export async function restaurantsUpdatePermissionHandler(req: Request, res: Response) {
+    checkPermissions(req, res, 'restaurants:update');
+}
+
+export async function cdnPermissionHandler(req: Request, res: Response) {
+    checkPermissions(req, res, 'cdn');
+}
+
+export async function orderPermissionHandler(req: Request, res: Response) {
+    checkPermissions(req, res, 'order');
+}
+
+export async function adminPermissionHandler(req: Request, res: Response) {
+    checkPermissions(req, res, 'admin');
+}
+
+export async function clientPermissionHandler(req: Request, res: Response) {
+    checkPermissions(req, res, 'client');
 }
 
 export async function checkPermissions(req: Request, res: Response, category: string) {
+
+  Logger.error(req)
+  Logger.error(res)
+  Logger.error(category)
+  
     var categories: { [id: string] : Array<string>; } = {};
-    categories["restaurants"] = ['Client', 'Admin'];
+    categories["restaurants:update"] = ['Admin', 'Restaurant'];
     categories["admin"] = ['Admin']; 
+    categories["client"] = ['Client', 'Admin'];
+    categories["cdn"] = ['Client', 'Admin', 'Restaurant', 'Delivery'];
+    categories["user"] = ['Client', 'Admin', 'Restaurant', 'Delivery'];
+    categories["order"] = ['Client', 'Admin', 'Restaurant'];
 
     const auth = req.headers.authorization;
     if (auth && auth.startsWith('Bearer')) {

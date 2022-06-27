@@ -6,13 +6,13 @@ const router = Router();
 
 router.get("/",getAllArticleCategoryHandler);
 
-router.post("/",createArticleCategoryHandler);
+router.post("/update",createArticleCategoryHandler);
 
 router.get("/:id", getArticleCategoryHandler);
 
-router.delete("/:id", deleteArticleCategoryHandler);
+router.delete("/update/:id", deleteArticleCategoryHandler);
 
-router.put("/:id", updateArticleCategoryHandler);
+router.put("/update/:id", updateArticleCategoryHandler);
 
 
 export default router;

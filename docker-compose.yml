@@ -72,14 +72,14 @@ services:
     environment:
       - DATABASE_URL=mongodb://mongo/cesi-eat-db
       - PORT=3000
-  back-location:
+  back-order:
     build:
-      context: './back-location'
+      context: './back-order'
       dockerfile: Dockerfile
       target: base
     volumes:
-      - ./back-location/src:/home/node/app/src
-      - ./back-location/nodemon.json:/home/node/app/nodemon.json
+      - ./back-order/src:/home/node/app/src
+      - ./back-order/nodemon.json:/home/node/app/nodemon.json
     expose:
       - '3000'
     ports:

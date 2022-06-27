@@ -16,9 +16,6 @@ export interface ArticleDocument extends ArticleInput, mongoose.Document {
 }
 
 const ArticleSchema: Schema = new Schema({
-  restaurantId: {
-    type: {type: mongoose.Schema.Types.ObjectId, ref: 'restaurant'},
-  },
   categoryId: {
     type: {type: mongoose.Schema.Types.ObjectId, ref: 'articleCategory'},
   },

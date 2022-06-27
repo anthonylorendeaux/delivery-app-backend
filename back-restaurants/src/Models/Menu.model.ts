@@ -20,9 +20,6 @@ const MenuSchema: Schema = new Schema({
     type: String,
     required: true,
   },
-  restaurantId: {
-    type: {type: mongoose.Schema.Types.ObjectId, ref: 'restaurant'},
-  },
 },
 {
   timestamps: true,

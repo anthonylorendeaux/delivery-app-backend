@@ -6,12 +6,12 @@ const router = Router();
 
 router.get("/",getAllMenuHandler);
 
-router.post("/",createMenuHandler);
+router.post("/update",createMenuHandler);
 
 router.get("/:id", getMenuHandler);
 
-router.delete("/:id", deleteMenuHandler);
+router.delete("/update/:id", deleteMenuHandler);
 
-router.put("/:id", updateMenuHandler);
+router.put("/update/:id", updateMenuHandler);
 
 export default router;

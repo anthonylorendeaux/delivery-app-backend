@@ -1,4 +1,4 @@
-import { createLocationHandler, deleteLocationHandler, getAllLocationHandler, getLocationHandler, updateLocationHandler } from "../Controllers/Location.controller";
+import { createOrderHandler, deleteOrderHandler, getAllOrderHandler, getOrderHandler, updateOrderHandler } from "../Controllers/Order.controller";
 import { Express, Request, Response } from "express";
 import Logger from "../utils/logger"
 
@@ -14,7 +14,7 @@ function routes(app: Express) {
    *       200:
    *         description: App is up and running
    */
-  app.get("/api/v1/microservice/healthcheck", async (req: Request, res: Response) => {
+  app.get("/api/v1/order/healthcheck", async (req: Request, res: Response) => {
     return res.sendStatus(200)
   })
 
@@ -71,17 +71,15 @@ function routes(app: Express) {
    *         description: Bad request
    */
 
-  app.get("/api/v1/microservice/locations",getAllLocationHandler);
+  app.get("/api/v1/order/all",getAllOrderHandler);
 
-  app.post("/api/v1/microservice/locations",createLocationHandler);
+  app.post("/api/v1/order",createOrderHandler);
 
-  app.get("/api/v1/microservice/locations/:id", getLocationHandler);
+  app.get("/api/v1/order/:id", getOrderHandler);
 
-  app.delete("/api/v1/microservice/locations/:id", deleteLocationHandler);
+  app.delete("/api/v1/order/:id", deleteOrderHandler);
 
-  app.put("/api/v1/microservice/locations/:id", updateLocationHandler);
-
-
+  app.put("/api/v1/order/:id", updateOrderHandler);
 }
 
 export default routes;
