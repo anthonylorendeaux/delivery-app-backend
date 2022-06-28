@@ -13,7 +13,10 @@ export interface MenuDocument extends MenuInput, mongoose.Document {
 }
 
 const MenuSchema: Schema = new Schema({
-  articlesId: {
+  restaurantId: {
+    type: {type: mongoose.Schema.Types.ObjectId, ref: 'restaurant'},
+  },
+  articles: {
     type: [{type: mongoose.Schema.Types.ObjectId, ref: 'article'}],
   },
   total: {

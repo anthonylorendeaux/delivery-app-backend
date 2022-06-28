@@ -26,12 +26,7 @@ export async function clientPermissionHandler(req: Request, res: Response) {
     checkPermissions(req, res, 'client');
 }
 
-export async function checkPermissions(req: Request, res: Response, category: string) {
-
-  Logger.error(req)
-  Logger.error(res)
-  Logger.error(category)
-  
+export async function checkPermissions(req: Request, res: Response, category: string){
     var categories: { [id: string] : Array<string>; } = {};
     categories["restaurants:update"] = ['Admin', 'Restaurant'];
     categories["admin"] = ['Admin']; 
