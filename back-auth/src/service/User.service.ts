@@ -67,31 +67,53 @@ export async function updateUser(id: IUser['id'], input: IUser) {
     try {
         const {name, email, profilePicture, phone, password, surname, isSuspended, createdAt, updatedAt, categoryId, location} = input;
 
-        const user = await prisma.user.update({
-            where: {
-                id: Number(id),
-            },
-            data: {
-                name,
-                email,
-                profilePicture,
-                phone,
-                password,
-                surname,
-                isSuspended,
-                categoryId,
-                location: {
-                    create: {  
-                        address: location[0].address,
-                        primary: location[0].primary
-                    },
+        if(location) {
+            const user = await prisma.user.update({
+                where: {
+                    id: Number(id),
+                },
+                data: {
+                    name,
+                    email,
+                    profilePicture,
+                    phone,
+                    password,
+                    surname,
+                    isSuspended,
+                    categoryId,
+                    location: {
+                        create: {  
+                            address: location[0].address,
+                            primary: location[0].primary 
+                        },
+                    }
+                },
+                include: {
+                    location: true
                 }
-            },
-            include: {
-                location: true
-            }
-        })
-        return user;
+            })
+            return user;
+        } else {
+            const user = await prisma.user.update({
+                where: {
+                    id: Number(id),
+                },
+                data: {
+                    name,
+                    email,
+                    profilePicture,
+                    phone,
+                    password,
+                    surname,
+                    isSuspended,
+                    categoryId,
+                },
+                include: {
+                    location: true
+                }
+            })
+            return user;
+        }
     } catch(e) {
         throw e;
     }
