@@ -19,6 +19,9 @@ const ArticleSchema: Schema = new Schema({
   categoryId: {
     type: {type: mongoose.Schema.Types.ObjectId, ref: 'articleCategory'},
   },
+  restaurantId: {
+    type: {type: mongoose.Schema.Types.ObjectId, ref: 'restaurant'},
+  },
   name: {
     type: String,
     required: true,

@@ -7,10 +7,9 @@ import {generateAuthToken, generateRefreshToken, verifyToken} from '../utils/jwt
 import jwt from 'jsonwebtoken';
 
 export async function registerHandler(req: Request, res: Response) {
-  Logger.info(req)
   let {email, password} = req.body;
 
-  const userExists = await findUser(10);
+  const userExists = await findUserByEmail(email);
   if(userExists) {
     return res.status(409).send({
       message: `User with email ${email} already exists`

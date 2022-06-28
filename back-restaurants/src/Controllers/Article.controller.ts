@@ -3,6 +3,9 @@ import Logger from '../utils/logger';
 import { createArticle, deleteArticle, findAndUpdateArticle, findArticle } from '../service/article.service';
 import { IDeleteArticleReq, IGetArticleReq, IUpdateArticleReq } from '../types/article';
 import ArticleModel from "../Models/Article.model";
+import { updateRestaurantHandler } from "./Restaurant.controller";
+import RestaurantModel from "Models/Restaurant.model";
+import { findAndUpdateRestaurant } from "../service/restaurant.service";
 
 export async function createArticleHandler(
   req: Request,
@@ -11,6 +14,12 @@ export async function createArticleHandler(
   const body = req.body;
 
   const article = await createArticle(body);
+  await findAndUpdateRestaurant(body.restaurantId, {
+    $push: {
+      articleIds: article._id
+    }
+  }, {safe: true, upsert: true}
+  );
   
   return res.send(article);
 }

@@ -12,7 +12,6 @@ import ArticleModel from "../Models/Article.model";
     const body = req.body;
 
   const restaurant = await createRestaurant(body);
-  
   return res.send(restaurant);
 }
 
