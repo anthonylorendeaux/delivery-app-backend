@@ -50,5 +50,5 @@ export interface IRestaurant extends Document {
 
 export interface IGetRestaurantReq extends Request<{ id: IRestaurant['id']}> {}
 export interface ICreateRestaurantReq extends Request<any, any,IRestaurant> {}
-export interface IUpdateRestaurantReq extends Request <{id: IRestaurant['id']}, any, IRestaurant> {}
+export interface IUpdateRestaurantReq extends Request <any, any, IRestaurant> {}
 export interface IDeleteRestaurantReq extends Request <{ id: IRestaurant['id']}>{} 

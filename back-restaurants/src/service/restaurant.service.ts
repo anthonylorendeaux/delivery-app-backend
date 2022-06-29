@@ -17,7 +17,13 @@ export async function findRestaurant(
     id: ObjectId
 ) {
     try {
-        const restaurant = await RestaurantModel.findById(id).populate("articles").populate("menus");
+        const restaurant = await RestaurantModel.findById(id).populate("articles").populate({
+            path: "menus", 
+            populate: { 
+                path: "articles",
+                model: "article"
+            }
+        });
         return restaurant;
     } catch(e) {
         throw e;
@@ -26,7 +32,13 @@ export async function findRestaurant(
 
 export async function findAllRestaurants() {
     try {
-        const restaurants = await RestaurantModel.find().populate("articles").populate("menus");
+        const restaurants = await RestaurantModel.find().populate("articles").populate({
+            path: "menus", 
+            populate: { 
+                path: "articles",
+                model: "article"
+            }
+        });
         return restaurants;
     } catch(e) {
         throw e;

@@ -6,6 +6,7 @@ import ArticleModel from "../Models/Article.model";
 import { updateRestaurantHandler } from "./Restaurant.controller";
 import RestaurantModel from "Models/Restaurant.model";
 import { findAndUpdateRestaurant } from "../service/restaurant.service";
+import mongoose, { Schema, Document, Types } from "mongoose"
 
 export async function createArticleHandler(
   req: Request,
@@ -16,7 +17,7 @@ export async function createArticleHandler(
   const article = await createArticle(body);
   await findAndUpdateRestaurant(body.restaurantId, {
     $push: {
-      articleIds: article._id
+      articles: article._id
     }
   }, {safe: true, upsert: true}
   );
@@ -25,11 +26,11 @@ export async function createArticleHandler(
 }
 
 export async function updateArticleHandler(
-  req: IUpdateArticleReq,
+  req: Request,
   res: Response
 ) {
   
-  const articleId = req.params.id;
+  const articleId = new mongoose.Types.ObjectId(req.params.id)
   const body = req.body;
 
   const article = await findArticle(articleId);
@@ -44,10 +45,10 @@ export async function updateArticleHandler(
 }
 
 export async function getArticleHandler(
-  req: IGetArticleReq,
+  req: Request,
   res: Response
 ) {
-  const articleId = req.params.id;
+  const articleId = new mongoose.Types.ObjectId(req.params.id)
   const article = await findArticle(articleId);
 
   if (!article) {
@@ -58,10 +59,10 @@ export async function getArticleHandler(
 }
 
 export async function deleteArticleHandler(
-  req: IDeleteArticleReq,
+  req: Request,
   res: Response
 ) {
-  const articleId = req.params.id;
+  const articleId = new mongoose.Types.ObjectId(req.params.id)
   const article = await findArticle(articleId);
 
   if (!article) {

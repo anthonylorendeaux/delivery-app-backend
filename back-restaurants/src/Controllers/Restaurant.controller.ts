@@ -4,6 +4,7 @@ import { createRestaurant, deleteRestaurant, findAllRestaurants, findAndUpdateRe
 import { IDeleteRestaurantReq, IGetRestaurantReq, IUpdateRestaurantReq } from "../types/restaurant";
 import RestaurantModel from "../Models/Restaurant.model";
 import ArticleModel from "../Models/Article.model";
+import mongoose, { Schema, Document, Types } from "mongoose"
 
   export async function createRestaurantHandler(
     req: Request,
@@ -16,11 +17,11 @@ import ArticleModel from "../Models/Article.model";
 }
 
 export async function updateRestaurantHandler(
-  req: IUpdateRestaurantReq,
+  req: Request,
   res: Response
 ) {
   
-  const restaurantId = req.params.id;
+  const restaurantId = new mongoose.Types.ObjectId(req.params.id)
   const body = req.body;
 
   const restaurant = await findRestaurant(restaurantId);
@@ -35,10 +36,10 @@ export async function updateRestaurantHandler(
 }
 
 export async function getRestaurantHandler(
-  req: IGetRestaurantReq,
+  req: Request,
   res: Response
 ) {
-  const restaurantId = req.params.id;
+  const restaurantId = new mongoose.Types.ObjectId(req.params.id)
   const restaurant = await findRestaurant(restaurantId);
 
   if (!restaurant) {
@@ -51,10 +52,10 @@ export async function getRestaurantHandler(
 }
 
 export async function deleteRestaurantHandler(
-  req: IDeleteRestaurantReq,
+  req: Request,
   res: Response
 ) {
-  const restaurantId = req.params.id;
+  const restaurantId = new mongoose.Types.ObjectId(req.params.id)
   const restaurant = await findRestaurant(restaurantId);
 
   if (!restaurant) {

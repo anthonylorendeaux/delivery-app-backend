@@ -1,6 +1,6 @@
 import { Express, Request, Response, Router } from "express";
+import { restaurantUpdateMiddleware } from "../middleware/restaurantUpdateMiddleware";
 import { createRestaurantHandler, deleteRestaurantHandler, getAllRestaurantHandler, getRestaurantHandler, updateRestaurantHandler } from "../Controllers/Restaurant.controller";
-
 
 const router = Router();
  /**
@@ -31,12 +31,12 @@ const router = Router();
 
   router.get("/",getAllRestaurantHandler);
 
-  router.post("/update",createRestaurantHandler);
+  router.post("/update", restaurantUpdateMiddleware,createRestaurantHandler);
 
   router.get("/:id", getRestaurantHandler);
 
-  router.delete("/update/:id", deleteRestaurantHandler);
+  router.delete("/update/:id", restaurantUpdateMiddleware,deleteRestaurantHandler);
 
-  router.put("/update/:id", updateRestaurantHandler);
+  router.put("/update/:id",restaurantUpdateMiddleware ,updateRestaurantHandler);
 
 export default router;

@@ -1,8 +1,10 @@
 import multer from "multer";
+import path from "path";
+import Logger from "../utils/logger";
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, "./uploads")
+      cb(null, path.join(__dirname, "../uploads"))
     },
     filename: function(req, file, cb) {
       const ext = file.mimetype.split("/")[1];

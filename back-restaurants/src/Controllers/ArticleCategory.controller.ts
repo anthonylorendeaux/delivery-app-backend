@@ -3,6 +3,7 @@ import Logger from '../utils/logger';
 import { createArticleCategory, deleteArticleCategory, findAndUpdateArticleCategory, findArticleCategory } from '../service/articleCategory.service';
 import { IDeleteArticleCategoryReq, IGetArticleCategoryReq, IUpdateArticleCategoryReq } from '../types/articleCategory';
 import ArticleCategoryModel from "../Models/ArticleCategory.model";
+import mongoose, { Schema, Document, Types } from "mongoose"
 
 export async function createArticleCategoryHandler(
   req: Request,
@@ -16,11 +17,11 @@ export async function createArticleCategoryHandler(
 }
 
 export async function updateArticleCategoryHandler(
-  req: IUpdateArticleCategoryReq,
+  req: Request,
   res: Response
 ) {
   
-  const articleCategoryId = req.params.id;
+  const articleCategoryId = new mongoose.Types.ObjectId(req.params.id)
   const body = req.body;
 
   const articleCategory = await findArticleCategory(articleCategoryId);
@@ -35,10 +36,10 @@ export async function updateArticleCategoryHandler(
 }
 
 export async function getArticleCategoryHandler(
-  req: IGetArticleCategoryReq,
+  req: Request,
   res: Response
 ) {
-  const articleCategoryId = req.params.id;
+  const articleCategoryId = new mongoose.Types.ObjectId(req.params.id)
   const articleCategory = await findArticleCategory(articleCategoryId);
 
   if (!articleCategory) {
@@ -49,10 +50,10 @@ export async function getArticleCategoryHandler(
 }
 
 export async function deleteArticleCategoryHandler(
-  req: IDeleteArticleCategoryReq,
+  req: Request,
   res: Response
 ) {
-  const articleCategoryId = req.params.id;
+  const articleCategoryId = new mongoose.Types.ObjectId(req.params.id)
   const articleCategory = await findArticleCategory(articleCategoryId);
 
   if (!articleCategory) {
