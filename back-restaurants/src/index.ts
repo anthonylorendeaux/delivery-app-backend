@@ -13,10 +13,13 @@ const app = express()
 app.use(express.json())
 
 const options: cors.CorsOptions = {
-  origin: '*'
+  origin: 'http://localhost:4000'
 };
 
-app.use(cors(options));
+app.use(cors({
+  origin: 'http://localhost:3000'
+}));
+
 app.use(morganMiddleware);
 
 app.get("/", (req: Request, res: Response) => {

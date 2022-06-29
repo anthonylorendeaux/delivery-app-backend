@@ -88,7 +88,7 @@ function routes(app: Express) {
  *          description: File not found
 */
   app.get("/api/v1/cdn/:id", async function(req, res) {
-    await res.sendFile((`./uploads/${req.params.id.toString()}`), {root: './'});
+    await res.sendFile(path.join(__dirname,`../uploads/${req.params.id.toString()}`));
   })
 }
 

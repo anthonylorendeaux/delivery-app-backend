@@ -3,6 +3,7 @@ import Logger from '../utils/logger';
 import { createRestaurantCategory, deleteRestaurantCategory, findAndUpdateRestaurantCategory, findRestaurantCategory } from "../service/restaurantCategory.service";
 import { IDeleteRestaurantCategoryReq, IGetRestaurantCategoryReq, IUpdateRestaurantCategoryReq } from "../types/restaurantCategory";
 import RestaurantCategoryModel from "../Models/RestaurantCategory.model";
+import mongoose, { Schema, Document, Types } from "mongoose"
 
   export async function createRestaurantCategoryHandler(
     req: Request,
@@ -16,11 +17,11 @@ import RestaurantCategoryModel from "../Models/RestaurantCategory.model";
 }
 
 export async function updateRestaurantCategoryHandler(
-  req: IUpdateRestaurantCategoryReq,
+  req: Request,
   res: Response
 ) {
   
-  const restaurantCategoryId = req.params.id;
+  const restaurantCategoryId = new mongoose.Types.ObjectId(req.params.id)
   const body = req.body;
 
   const restaurantCategory = await findRestaurantCategory(restaurantCategoryId);
@@ -35,10 +36,10 @@ export async function updateRestaurantCategoryHandler(
 }
 
 export async function getRestaurantCategoryHandler(
-  req: IUpdateRestaurantCategoryReq,
+  req: Request,
   res: Response
 ) {
-  const restaurantCategoryId = req.params.id;
+  const restaurantCategoryId = new mongoose.Types.ObjectId(req.params.id)
   const restaurantCategory = await findRestaurantCategory(restaurantCategoryId);
 
   if (!restaurantCategory) {
@@ -49,10 +50,10 @@ export async function getRestaurantCategoryHandler(
 }
 
 export async function deleteRestaurantCategoryHandler(
-  req: IDeleteRestaurantCategoryReq,
+  req: Request,
   res: Response
 ) {
-  const restaurantCategoryId = req.params.id;
+  const restaurantCategoryId = new mongoose.Types.ObjectId(req.params.id)
   const restaurantCategory = await findRestaurantCategory(restaurantCategoryId);
 
   if (!restaurantCategory) {

@@ -66,7 +66,8 @@ export async function findAllUsers() {
 export async function updateUser(id: IUser['id'], input: IUser) {
     try {
         const {name, email, profilePicture, phone, password, surname, isSuspended, createdAt, updatedAt, categoryId, location} = input;
-
+        Logger.warn(location);
+        Logger.error(location)
         if(location) {
             const user = await prisma.user.update({
                 where: {
@@ -89,6 +90,7 @@ export async function updateUser(id: IUser['id'], input: IUser) {
                     }
                 },
                 include: {
+                    Category: true,
                     location: true
                 }
             })
@@ -109,6 +111,7 @@ export async function updateUser(id: IUser['id'], input: IUser) {
                     categoryId,
                 },
                 include: {
+                    Category: true,
                     location: true
                 }
             })
@@ -154,6 +157,7 @@ export async function deleteUser(id: IUser['id']) {
 
 export async function createSession(id: IUser['id'], token: string) {
     try {
+
         const session = await prisma.session.create({
             data: {
                 userId: Number(id),
@@ -197,6 +201,19 @@ export async function findSession(id: IUser['id']) {
             }
         })
         return session;
+    } catch(err) {
+            throw err;
+    }
+}
+
+export async function findSessions() {
+    try {
+        const sessions = await prisma.session.findMany({
+            include: {
+                User: true
+            }
+        })
+        return sessions;
     } catch(err) {
             throw err;
     }

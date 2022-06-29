@@ -1,9 +1,9 @@
 import { ObjectId } from "mongodb";
-import mongoose, { Schema, Document } from "mongoose"
+import mongoose, { Schema, Document, Types } from "mongoose"
 
 export interface ArticleInput {
     restaurantId: ObjectId;
-    categoryId: ObjectId;
+    articleCategory: Types.ObjectId;
     name: String;
     description: String;
     picture: String;
@@ -16,11 +16,11 @@ export interface ArticleDocument extends ArticleInput, mongoose.Document {
 }
 
 const ArticleSchema: Schema = new Schema({
-  categoryId: {
-    type: {type: mongoose.Schema.Types.ObjectId, ref: 'articleCategory'},
+  articleCategory: {
+    type: mongoose.Schema.Types.ObjectId, ref: 'articleCategory'
   },
   restaurantId: {
-    type: {type: mongoose.Schema.Types.ObjectId, ref: 'restaurant'},
+    type: mongoose.Schema.Types.ObjectId, ref: 'restaurant'
   },
   name: {
     type: String,

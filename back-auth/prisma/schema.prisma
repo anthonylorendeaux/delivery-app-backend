@@ -21,13 +21,14 @@ model User {
   isSuspended    Boolean    @default(false)
   createdAt      DateTime   @default(now())
   updatedAt      DateTime   @updatedAt
-  Category       Category  @relation(fields: [categoryId], references: [id])
+  Category       Category   @relation(fields: [categoryId], references: [id])
   categoryId     Int
   location       Location[]
   session        Session[]
   referer        Referer[]  @relation("user")
   refered        Referer[]  @relation("refered")
   isDeleted      Boolean    @default(false)
+  Cookies         Boolean @default(false)
 }
 
 model Category {

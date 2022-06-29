@@ -1,6 +1,6 @@
 import {Request} from "express"
 import { ObjectId } from "mongodb";
-import { Document } from "mongoose"
+import { Document, Types } from "mongoose"
 
 /**
  * @openapi
@@ -27,7 +27,7 @@ import { Document } from "mongoose"
 export interface IArticle extends Document {
   id: ObjectId;
   restaurantId: ObjectId;
-  categoryId: ObjectId;
+  articleCategory: Types.ObjectId;
   name: String;
   description: String;
   picture: String;

@@ -3,6 +3,7 @@ import Logger from '../utils/logger';
 import { createMenu, deleteMenu, findAndUpdateMenu, findMenu } from '../service/menu.service';
 import { IDeleteMenuReq, IGetMenuReq, IUpdateMenuReq } from '../types/menu';
 import MenuModel from "../Models/Menu.model";
+import mongoose, { Schema, Document, Types } from "mongoose"
 
 export async function createMenuHandler(
   req: Request,
@@ -16,11 +17,11 @@ export async function createMenuHandler(
 }
 
 export async function updateMenuHandler(
-  req: IUpdateMenuReq,
+  req: Request,
   res: Response
 ) {
   
-  const menuId = req.params.id;
+  const menuId = new mongoose.Types.ObjectId(req.params.id)
   const body = req.body;
 
   const menu = await findMenu(menuId);
@@ -35,10 +36,10 @@ export async function updateMenuHandler(
 }
 
 export async function getMenuHandler(
-  req: IGetMenuReq,
+  req: Request,
   res: Response
 ) {
-  const menuId = req.params.id;
+  const menuId = new mongoose.Types.ObjectId(req.params.id)
   const menu = await findMenu(menuId);
 
   if (!menu) {
@@ -49,10 +50,10 @@ export async function getMenuHandler(
 }
 
 export async function deleteMenuHandler(
-  req: IDeleteMenuReq,
+  req: Request,
   res: Response
 ) {
-  const menuId = req.params.id;
+  const menuId = new mongoose.Types.ObjectId(req.params.id)
   const menu = await findMenu(menuId);
 
   if (!menu) {

@@ -27,6 +27,8 @@ export async function clientPermissionHandler(req: Request, res: Response) {
 }
 
 export async function checkPermissions(req: Request, res: Response, category: string){
+    Logger.warn(req.headers);
+
     var categories: { [id: string] : Array<string>; } = {};
     categories["restaurants:update"] = ['Admin', 'Restaurant'];
     categories["admin"] = ['Admin']; 
@@ -44,7 +46,9 @@ export async function checkPermissions(req: Request, res: Response, category: st
       }
       try {
         const {_id, email, permission,iat, exp} = <jwt.MyJwtPayload>verifyToken(token, "token");
+        Logger.warn(_id)
         const isConnected = await findSession(Number(_id));
+        Logger.warn(isConnected)
         if(isConnected) {
           const user = await findUser(Number(_id));
           if(!user) {

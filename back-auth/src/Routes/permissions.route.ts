@@ -1,4 +1,5 @@
 import { Request, Response, Router } from "express";
+import { findSession, findSessions } from "../service/User.service";
 import {adminPermissionHandler, cdnPermissionHandler, clientPermissionHandler, orderPermissionHandler, restaurantsUpdatePermissionHandler} from "../Controllers/Permission.controller";
 
 const router = Router();
@@ -27,5 +28,10 @@ router.get("/order", orderPermissionHandler)
 router.get("/admin", adminPermissionHandler)
 
 router.get("/client", clientPermissionHandler)
+
+router.get("/session/all", async (req: Request, res: Response) => {
+    const sessions =  await findSessions();
+    return res.send(sessions);
+})
 
 export default router;
