@@ -16,6 +16,7 @@ export async function createOrderHandler(
   const socket = req.app.get('io');
   if(delivery) {
       socket.emit('client', {delivery});
+      socket.emit('restaurants', {delivery});
   }
 
   return res.send(delivery);
@@ -38,11 +39,13 @@ export async function updateOrderHandler(
   // Sockets
   const socket = req.app.get('io');
   if(updatedOrder) {
-    if(updatedOrder.status === 'preparating') {
+    if(updatedOrder.status === 'accepted') {
+      socket.emit('restaurants', {updatedOrder});
       socket.emit('delivery', {updatedOrder});
     }
-    if(updatedOrder.status === 'accepted') {
-      socket.emit(`restaurants`, {updatedOrder});
+    if(updatedOrder.status === 'delivering') {
+      socket.emit('delivery', {updatedOrder});
+      socket.emit('restaurants', {updatedOrder});
     }
     socket.emit('client', {updatedOrder});
   }
