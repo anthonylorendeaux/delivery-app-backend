@@ -13,7 +13,8 @@ export async function createArticleHandler(
   res: Response
 ) {
   const body = req.body;
-
+  delete body["_id"];
+  
   const article = await createArticle(body);
   await findAndUpdateRestaurant(body.restaurantId, {
     $push: {
@@ -21,7 +22,6 @@ export async function createArticleHandler(
     }
   }, {safe: true, upsert: true}
   );
-  
   return res.send(article);
 }
 
@@ -30,17 +30,24 @@ export async function updateArticleHandler(
   res: Response
 ) {
   
-  const articleId = new mongoose.Types.ObjectId(req.params.id)
+  Logger.warn(req.params.id);
+
+  const articleId = new mongoose.Types.ObjectId(req.params.id);
+  Logger.warn(articleId);
   const body = req.body;
 
+  delete body["_id"];
+  Logger.info(body);
+
   const article = await findArticle(articleId);
+  Logger.warn(article)
 
   if(!article) {
     return res.sendStatus(404);
   }
 
-  const updatedArticle = await findAndUpdateArticle({articleId}, body, {new: true});
-
+  const updatedArticle = await ArticleModel.findByIdAndUpdate(articleId, body, {new: true});
+  Logger.warn(updatedArticle)
   return res.send(updatedArticle);
 }
 

@@ -25,11 +25,14 @@ import { Document } from "mongoose"
  */
 
 export interface IOrder extends Document {
-  articles: Array<string>;
-  menus: Array<string>;
-  status: Array<string>;
+  id: ObjectId;
+  articles: Array<object>;
+  menus: Array<object>;
+  status: String;
   discount: Boolean;
   customerId: Number;
+  deliveryId: ObjectId;
+  restaurantId: ObjectId;
 }
 
 export interface IGetOrderReq extends Request<{ id: IOrder['id']}> {}

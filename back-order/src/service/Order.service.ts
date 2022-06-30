@@ -2,6 +2,7 @@ import { FilterQuery, QueryOptions, UpdateQuery } from "mongoose";
 import OrderModel from "../Models/Order.model";
 import { ObjectId } from "mongodb";
 import { IOrder } from "../types/Order";
+import Logger from "../utils/logger";
 
 
 export async function createOrder(input: IOrder) {
@@ -34,4 +35,13 @@ export async function findAndUpdateOrder(
 
 export async function deleteOrder(query: FilterQuery<IOrder>) {
     return OrderModel.deleteOne(query);
+}
+
+export async function findOrdersByStatus(status: string) {
+    return OrderModel.find({status: status}).exec();
+}
+
+export async function findOrdersByCustomerId(customerId: string) {
+    Logger.warn(customerId);
+    return OrderModel.find({customerId: customerId}).exec();
 }

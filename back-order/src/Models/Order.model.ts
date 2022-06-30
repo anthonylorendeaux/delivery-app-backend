@@ -2,11 +2,12 @@ import { ObjectId } from "mongodb";
 import mongoose, { Schema, Document } from "mongoose"
 
 export interface OrderInput {
-    articles: Array<string>;
-    menus: Array<string>;
-    status: Array<string>;
+    articles: Array<object>;
+    menus: Array<object>;
+    status: string;
     discount: Boolean;
     customerId: Number;
+    restaurantId: ObjectId;
 }
 
 export interface OrderDocument extends OrderInput, mongoose.Document {
@@ -16,15 +17,15 @@ export interface OrderDocument extends OrderInput, mongoose.Document {
 
 const OrderSchema: Schema = new Schema({
   articles: {
-    type: [Array],
+    type: [{}],
     required: true,
   },
   menus: {
-    type: [Array],
+    type: [{}],
     required: true,
   },
   status: {
-    type: [String],
+    type: String,
     enum: ['pending', 'accepted', 'rejected', 'preparating','delivering','delivered'],
     required: true,
   },
@@ -32,10 +33,17 @@ const OrderSchema: Schema = new Schema({
     type: Boolean,
     required: true,
   },
+  restaurantId: {
+    type: ObjectId,
+    required: true,
+  },
   customerId: {
     type: Number,
     required: true,
   },
+  deliveryId: {
+    type: ObjectId,
+  }
 },
 {
   timestamps: true,
