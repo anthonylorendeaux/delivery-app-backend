@@ -12,6 +12,6 @@ router.get("/:id", getArticleHandler);
 
 router.delete("/update/:id", restaurantUpdateMiddleware,deleteArticleHandler);
 
-router.put("/update/:id", restaurantUpdateMiddleware,updateArticleHandler);
+router.put("/update/:id",updateArticleHandler);
 
 export default router;

@@ -1,4 +1,4 @@
-import { createOrderHandler, deleteOrderHandler, getAllOrderHandler, getOrderHandler, updateOrderHandler } from "../Controllers/Order.controller";
+import { createOrderHandler, deleteOrderHandler, getAllOrderHandler, getOrderByCustomerId, getOrderByStatus, getOrderHandler, updateOrderHandler } from "../Controllers/Order.controller";
 import { Express, Request, Response } from "express";
 import Logger from "../utils/logger"
 
@@ -80,6 +80,10 @@ function routes(app: Express) {
   app.delete("/api/v1/order/:id", deleteOrderHandler);
 
   app.put("/api/v1/order/:id", updateOrderHandler);
+
+  app.get("/api/v1/order/status/:status", getOrderByStatus);
+
+  app.get("/api/v1/order/customer/:customerId", getOrderByCustomerId);
 }
 
 export default routes;
